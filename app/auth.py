@@ -2,7 +2,7 @@
 
 from flask import redirect, render_template, flash, Blueprint, request, url_for
 from flask_login import login_required, logout_user, current_user, login_user
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import LoginForm, RegisterForm
 from .models import db, User
 from . import lm
@@ -37,7 +37,7 @@ def login_page():
         # Validate login attempt
         user = User.query.filter_by(email=email).first()
         if user:
-            if user.password == password:
+            if check_password_hash(user.password, password):
                 login_user(user)
                 next = request.args.get('next')
                 return redirect(next or url_for('main_bp.index'))

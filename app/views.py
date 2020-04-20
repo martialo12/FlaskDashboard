@@ -12,6 +12,7 @@ import requests
 from flask import render_template, request, url_for, redirect, send_from_directory
 from flask_login import login_user, logout_user
 from werkzeug.exceptions import HTTPException, NotFound, abort
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import os, logging
 
@@ -82,7 +83,7 @@ def register():
 
         else:
 
-            pw_hash = bc.generate_password_hash(password)
+            pw_hash = generate_password_hash(password)
 
             user = User(username, email, pw_hash)
 
@@ -121,7 +122,7 @@ def login():
         user = User.query.filter_by(user=username).first()
         if user:
 
-            if bc.check_password_hash(user.password, password):
+            if check_password_hash(user.password, password):
                 login_user(user)
                 return redirect(url_for('index'))
             else:

@@ -40,10 +40,6 @@ with app.app_context():
     # Import parts of our application
     from . import auth, models, routes
     from .restapi.stats import ApiStats
-    from .models import User, Role
-
-    # Setup Flask-User and specify the User data-model
-    # user_manager = UserManager(app, db, User)
 
     app.register_blueprint(routes.main_bp)
     app.register_blueprint(auth.auth_bp)

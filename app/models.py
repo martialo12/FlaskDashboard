@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
     def __init__(self, lastname, firstname, email, password):
         self.lastname = lastname
         self.firstname = firstname
-        self.password = generate_password_hash(password)
+        self.password = password
         self.email = email
         self.is_admin = False
         self.created_on = datetime.now()
@@ -169,7 +169,7 @@ class Stats(db.Model):
     val_s = db.Column(db.String(256))
 
     def __init__(self, key):
-        self.key   = key
+        self.key = key
 
         db_obj = Stats.query.filter_by(key=key).first()
         if db_obj:
@@ -182,7 +182,7 @@ class Stats(db.Model):
 
             db.session.add ( self )
 
-            self.val   = 0
+            self.val = 0
             self.val_s = ''
 
     def __repr__(self):
