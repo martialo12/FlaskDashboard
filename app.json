@@ -1,0 +1,15 @@
+{
+  "name": "Flask Dashboard",
+  "description": "Flask Dashboard app on Heroku",
+  "keywords": [
+    "flask",
+    "python",
+    "sample"
+  ],
+  "repository": "https://github.com/martialo12/FlaskDashboard",
+  "scripts": {
+    "postdeploy": "python -c 'from app import db; db.create_all()'"
+  },
+  "addons": [ 
+  ]
+}
